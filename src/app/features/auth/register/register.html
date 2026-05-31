@@ -1,0 +1,180 @@
+<div class="register-page">
+
+  <!-- Left Panel — Brand -->
+  <div class="panel-left">
+    <div class="panel-left-inner">
+
+      <div class="brand">
+        <div class="brand-icon">
+          <i class="ti ti-brain" aria-hidden="true"></i>
+        </div>
+        <span class="brand-name">RAG<em>App</em></span>
+      </div>
+
+      <div class="panel-tagline">
+        Join thousands already searching smarter with AI.
+      </div>
+
+      <ul class="step-list">
+        <li class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <span class="step-title">Create your account</span>
+            <span class="step-sub">Set up email &amp; password</span>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <span class="step-title">Upload your documents</span>
+            <span class="step-sub">PDFs, docs, text files</span>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <span class="step-title">Start chatting with AI</span>
+            <span class="step-sub">Ask anything, get answers</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="panel-footer">
+        ragapp.io &nbsp;·&nbsp; 2025
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Right Panel — Form -->
+  <div class="panel-right">
+    <div class="form-card">
+
+      <div class="form-header">
+        <h2 class="form-title">Create account</h2>
+        <p class="form-sub">Fill in your details to get started for free</p>
+      </div>
+
+      <div class="form-body">
+
+        <!-- Email -->
+        <div class="field">
+          <label class="field-label" for="email">Email address</label>
+          <div class="input-wrap">
+            <i class="ti ti-mail input-icon" aria-hidden="true"></i>
+            <input
+              id="email"
+              class="input"
+              type="email"
+              placeholder="you@example.com"
+              [(ngModel)]="email"
+              name="email"
+              (blur)="validateEmail()"
+              [class.input-error]="emailError"
+              [class.input-success]="!emailError && email"
+            />
+          </div>
+          <span class="field-error" *ngIf="emailError">{{ emailError }}</span>
+        </div>
+
+        <!-- Password -->
+        <div class="field">
+          <label class="field-label" for="password">Password</label>
+          <div class="input-wrap">
+            <i class="ti ti-lock input-icon" aria-hidden="true"></i>
+            <input
+              id="password"
+              class="input"
+              [type]="showPassword ? 'text' : 'password'"
+              placeholder="Min. 8 characters"
+              [(ngModel)]="password"
+              name="password"
+              (input)="onPasswordInput()"
+            />
+            <button
+              class="toggle-pw"
+              type="button"
+              (click)="showPassword = !showPassword"
+              [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+            >
+              <i [class]="showPassword ? 'ti ti-eye-off' : 'ti ti-eye'" aria-hidden="true"></i>
+            </button>
+          </div>
+          <!-- Password strength bar -->
+          <div class="strength-bar" *ngIf="password">
+            <div
+              class="strength-seg"
+              *ngFor="let seg of [0,1,2,3]"
+              [class.weak]="passwordStrength > seg && passwordStrength === 1"
+              [class.medium]="passwordStrength > seg && passwordStrength === 2"
+              [class.strong]="passwordStrength > seg && passwordStrength >= 3"
+            ></div>
+          </div>
+          <span class="strength-label" *ngIf="password" [class]="strengthClass">
+            {{ strengthLabel }}
+          </span>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="field">
+          <label class="field-label" for="confirmPassword">Confirm password</label>
+          <div class="input-wrap">
+            <i class="ti ti-lock input-icon" aria-hidden="true"></i>
+            <input
+              id="confirmPassword"
+              class="input"
+              [type]="showConfirm ? 'text' : 'password'"
+              placeholder="Repeat your password"
+              [(ngModel)]="confirmPassword"
+              name="confirmPassword"
+              (input)="onConfirmInput()"
+              [class.input-error]="confirmPassword && !passwordsMatch"
+              [class.input-success]="confirmPassword && passwordsMatch"
+            />
+            <button
+              class="toggle-pw"
+              type="button"
+              (click)="showConfirm = !showConfirm"
+              [attr.aria-label]="showConfirm ? 'Hide password' : 'Show password'"
+            >
+              <i [class]="showConfirm ? 'ti ti-eye-off' : 'ti ti-eye'" aria-hidden="true"></i>
+            </button>
+          </div>
+          <span class="match-hint match-ok" *ngIf="confirmPassword && passwordsMatch">
+            <i class="ti ti-circle-check" aria-hidden="true"></i> Passwords match
+          </span>
+          <span class="match-hint match-no" *ngIf="confirmPassword && !passwordsMatch">
+            <i class="ti ti-circle-x" aria-hidden="true"></i> Passwords do not match
+          </span>
+        </div>
+
+        <!-- Submit -->
+        <button
+          class="btn-register"
+          (click)="register()"
+          [class.loading]="isLoading"
+          [disabled]="isLoading"
+        >
+          <span *ngIf="!isLoading">
+            <i class="ti ti-user-plus" aria-hidden="true"></i>
+            Create account
+          </span>
+          <span *ngIf="isLoading" class="spinner"></span>
+        </button>
+
+        <!-- Error -->
+        <p class="error-msg" *ngIf="errorMessage">
+          <i class="ti ti-alert-circle" aria-hidden="true"></i>
+          {{ errorMessage }}
+        </p>
+
+      </div>
+
+      <div class="form-footer">
+        <p>Already have an account? <a routerLink="/login" class="login-link">Sign in</a></p>
+      </div>
+
+    </div>
+  </div>
+
+</div>

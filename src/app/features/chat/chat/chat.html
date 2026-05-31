@@ -1,0 +1,144 @@
+<div class="chat-container">
+
+  <!-- Header -->
+  <div class="chat-header">
+    <h2>AI Document Analyzer</h2>
+  </div>
+
+  <!-- Upload Section -->
+  <div class="upload-box">
+    <input type="file" (change)="onFileSelected($event)" />
+    <button (click)="uploadDocument()">Upload</button>
+  </div>
+
+  <div class="message-container">
+
+  <div *ngIf="isUploading" class="uploading-message">
+    Uploading document...
+  </div>
+
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+</div>
+  <!-- Chat Messages -->
+  <div class="chat-box">
+
+    <div *ngFor="let msg of messages" class="message-wrapper">
+
+      <!-- USER MESSAGE -->
+      <div *ngIf="msg.role === 'user'" class="user-msg">
+        
+        <div class="message-top">
+          <span class="label">You</span>
+        </div>
+
+        <!-- Remove Quotes -->
+        <p>{{ msg.content.replaceAll('"', '') }}</p>
+
+        <div class="message-actions">
+          <button (click)="copyText(msg.content)">Copy</button>
+        </div>
+      </div>
+
+      <!-- AI MESSAGE -->
+      <!-- AI MESSAGE -->
+<div *ngIf="msg.role === 'ai'" class="ai-msg">
+
+  <div class="message-top">
+    <span class="label">AI Assistant</span>
+  </div>
+
+  <!-- THINKING ANIMATION -->
+  <div *ngIf="msg.content === '__thinking__'" class="typing-container">
+
+    <div class="typing-dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <span class="typing-text">Thinking...</span>
+
+  </div>
+
+  <!-- REAL RESPONSE -->
+  <div *ngIf="msg.content !== '__thinking__'">
+
+    <p>{{ msg.content.replaceAll('"', '') }}</p>
+
+    <div class="message-actions">
+
+      <button (click)="copyText(msg.content)">
+        Copy
+      </button>
+
+      <!-- Sources Button -->
+      <button
+        *ngIf="msg.sources?.length"
+        (click)="msg.showSources = !msg.showSources">
+
+        {{ msg.showSources ? 'Hide Sources' : 'Show Sources' }}
+
+      </button>
+
+    </div>
+
+    <!-- Sources -->
+    <div *ngIf="msg.showSources" class="sources-box">
+
+      <h4>Sources</h4>
+
+      <ul>
+        <li *ngFor="let src of msg.sources">
+          {{ src }}
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+
+</div>
+
+    </div>
+
+  </div>
+
+  <!-- Loading -->
+  <!-- Thinking Animation -->
+<div *ngIf="isLoading" class="thinking-container">
+
+  <div class="thinking-message">
+
+    <div class="typing-dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="thinking-text">
+      AI is thinking...
+    </div>
+
+  </div>
+
+</div>
+  <!-- Input -->
+  <div class="input-box">
+
+    <input
+      [(ngModel)]="userInput"
+      placeholder="Ask anything about your document..."
+      (keyup.enter)="sendMessage()" />
+
+    <button (click)="sendMessage()">Send</button>
+
+  </div>
+
+</div>

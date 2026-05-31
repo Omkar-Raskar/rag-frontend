@@ -1,0 +1,126 @@
+<div class="login-page">
+
+  <!-- Left Panel — Brand -->
+  <div class="panel-left">
+    <div class="panel-left-inner">
+
+      <div class="brand">
+        <div class="brand-icon">
+          <i class="ti ti-brain" aria-hidden="true"></i>
+        </div>
+        <span class="brand-name">RAG<em>App</em></span>
+      </div>
+
+      <div class="panel-tagline">
+        Intelligent document retrieval,<br />powered by AI.
+      </div>
+
+      <ul class="feature-list">
+        <li class="feature-item">
+          <div class="feature-icon">
+            <i class="ti ti-search" aria-hidden="true"></i>
+          </div>
+          <div class="feature-text">
+            <span class="feature-title">Semantic search</span>
+            <span class="feature-sub">Across all your documents</span>
+          </div>
+        </li>
+        <li class="feature-item">
+          <div class="feature-icon">
+            <i class="ti ti-message-2" aria-hidden="true"></i>
+          </div>
+          <div class="feature-text">
+            <span class="feature-title">Chat with your docs</span>
+            <span class="feature-sub">Ask anything, get answers</span>
+          </div>
+        </li>
+        <li class="feature-item">
+          <div class="feature-icon">
+            <i class="ti ti-bolt" aria-hidden="true"></i>
+          </div>
+          <div class="feature-text">
+            <span class="feature-title">Real-time AI responses</span>
+            <span class="feature-sub">Fast, accurate, contextual</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="panel-footer">
+        ragapp.io &nbsp;·&nbsp; 2025
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Right Panel — Form -->
+  <div class="panel-right">
+    <div class="form-card">
+
+      <div class="form-header">
+        <h2 class="form-title">Sign in</h2>
+        <p class="form-sub">Enter your credentials to continue</p>
+      </div>
+
+      <div class="form-body">
+
+        <div class="field">
+          <label class="field-label" for="email">Email address</label>
+          <div class="input-wrap">
+            <i class="ti ti-mail input-icon" aria-hidden="true"></i>
+            <input
+              id="email"
+              class="input"
+              type="email"
+              placeholder="you@example.com"
+              [(ngModel)]="email"
+              name="email"
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-label-row">
+            <label class="field-label" for="password">Password</label>
+            <a class="forgot-link" href="#">Forgot password?</a>
+          </div>
+          <div class="input-wrap">
+            <i class="ti ti-lock input-icon" aria-hidden="true"></i>
+            <input
+              id="password"
+              class="input"
+              [type]="showPassword ? 'text' : 'password'"
+              placeholder="••••••••"
+              [(ngModel)]="password"
+              name="password"
+            />
+            <button
+              class="toggle-pw"
+              type="button"
+              (click)="showPassword = !showPassword"
+              [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+            >
+              <i [class]="showPassword ? 'ti ti-eye-off' : 'ti ti-eye'" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <button class="btn-login" (click)="login()" [class.loading]="isLoading">
+          <span *ngIf="!isLoading">Sign in</span>
+          <span *ngIf="isLoading" class="spinner"></span>
+        </button>
+
+        <p *ngIf="errorMessage" class="error-msg">
+          <i class="ti ti-alert-circle" aria-hidden="true"></i>
+          {{ errorMessage }}
+        </p>
+
+      </div>
+
+      <div class="form-footer">
+        <p>Don't have an account? <a routerLink="/register" class="register-link">Register</a></p>
+      </div>
+
+    </div>
+  </div>
+
+</div>

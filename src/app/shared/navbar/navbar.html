@@ -1,0 +1,43 @@
+<nav class="navbar">
+
+  <a class="brand" routerLink="/">
+    <div class="brand-icon">
+      <i class="ti ti-brain" aria-hidden="true"></i>
+    </div>
+    <span class="brand-name">RAG<em>App</em></span>
+  </a>
+
+  <div class="nav-right">
+
+    <!-- Logged out -->
+    <ng-container *ngIf="!authService.isLoggedIn()">
+      <div class="pill-group">
+        <a class="pill" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          <i class="ti ti-login" aria-hidden="true"></i>
+          Login
+        </a>
+      </div>
+      <a class="btn-register" routerLink="/register">Register</a>
+    </ng-container>
+
+    <!-- Logged in -->
+    <ng-container *ngIf="authService.isLoggedIn()">
+      <div class="pill-group">
+        <a class="pill" routerLink="/profile" routerLinkActive="active">
+          <i class="ti ti-user" aria-hidden="true"></i>
+          Profile
+        </a>
+        <span class="pill-divider"></span>
+        <a class="pill" routerLink="/chat" routerLinkActive="active">
+          <i class="ti ti-message-2" aria-hidden="true"></i>
+          Chat
+        </a>
+      </div>
+      <button class="btn-logout" (click)="logout()">
+        <i class="ti ti-logout" aria-hidden="true"></i>
+        Logout
+      </button>
+    </ng-container>
+
+  </div>
+</nav>

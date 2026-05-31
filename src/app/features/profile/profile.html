@@ -1,0 +1,64 @@
+<div class="profile-page">
+
+  <!-- PROFILE CARD -->
+  <div class="profile-card" *ngIf="user; else loadingTpl">
+
+    <!-- Avatar -->
+    <div class="avatar">
+      {{ getInitials(user.email) }}
+    </div>
+
+    <!-- User Info -->
+    <h2 class="profile-name">
+      {{ user.email }}
+    </h2>
+
+    <p class="profile-role" *ngIf="user.role">
+      {{ user.role }}
+    </p>
+
+    <!-- Info Section -->
+    <div class="profile-info">
+
+      <div class="info-item">
+        <span class="label">Email</span>
+        <span class="value">{{ user.email }}</span>
+      </div>
+
+      <div class="info-item" *ngIf="user.role">
+        <span class="label">Role</span>
+        <span class="value">{{ user.role }}</span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">Status</span>
+        <span class="value active">Active</span>
+      </div>
+
+    </div>
+
+    <!-- Logout -->
+    <button class="logout-btn" (click)="logout()">
+      Logout
+    </button>
+
+  </div>
+
+</div>
+
+<!-- Loading -->
+<ng-template #loadingTpl>
+
+  <div class="loading-card">
+
+    <div class="loading-avatar"></div>
+
+    <div class="loading-line medium"></div>
+
+    <div class="loading-line short"></div>
+
+    <div class="loading-line long"></div>
+
+  </div>
+
+</ng-template>
