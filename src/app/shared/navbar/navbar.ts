@@ -8,12 +8,15 @@ import { Register } from '../../features/auth/register/register';
 import { Chat } from '../../features/chat/chat/chat';
 import { AuthService } from '../../core/services/auth';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import {
+  RouterLink,
+  RouterLinkActive
+} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [FormsModule,Login,Register,Chat,CommonModule,RouterLink],
+  imports: [FormsModule,CommonModule,RouterLink,RouterLinkActive],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
