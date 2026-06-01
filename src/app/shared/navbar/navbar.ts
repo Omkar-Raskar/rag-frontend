@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Form } from 'react-bootstrap';
 import { RouterOutlet } from '@angular/router';
 import { Login } from '../../features/auth/login/login';
 import { Register } from '../../features/auth/register/register';
